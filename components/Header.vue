@@ -1,33 +1,18 @@
-vue
-// filepath: c:\coding\Furrel\my-portfolio\components\Header.vue
 <template>
-  <v-app-bar color="transparent" flat>
+  <v-app-bar
+    color="transparent"
+    flat
+    elevation="0"
+    app
+    height="64"
+    style="backdrop-filter: blur(8px);"
+  >
     <v-container>
       <v-row justify="center">
-        <v-col cols="auto" class="d-none d-md-flex">
-          <v-btn text href="#about" class="mx-2" color="purple-lighten-2">About me</v-btn>
-          <v-btn text href="#projects" class="mx-2" color="purple-lighten-2">Projects</v-btn>
-          <v-btn text href="#contacts" class="mx-2" color="purple-lighten-2">Contacts</v-btn>
-        </v-col>
-        <v-col cols="auto" class="d-flex d-md-none">
-          <v-menu>
-            <template #activator="{ props }">
-              <v-btn icon v-bind="props">
-                <v-icon>mdi-menu</v-icon>
-              </v-btn>
-            </template>
-            <v-list>
-              <v-list-item link href="#about">
-                <v-list-item-title>About me</v-list-item-title>
-              </v-list-item>
-              <v-list-item link href="#projects">
-                <v-list-item-title>Projects</v-list-item-title>
-              </v-list-item>
-              <v-list-item link href="#contacts">
-                <v-list-item-title>Contacts</v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-menu>
+        <v-col cols="auto">
+          <v-btn text href="#about" style="font-weight:900; font-size:1rem; color:#181818; letter-spacing:1px;">ABOUT ME</v-btn>
+          <v-btn text href="#projects" style="font-weight:900; font-size:1rem; color:#181818; letter-spacing:1px;">PROJECTS</v-btn>
+          <v-btn text href="#contacts" style="font-weight:900; font-size:1rem; color:#181818; letter-spacing:1px;">CONTACT</v-btn>
         </v-col>
       </v-row>
     </v-container>

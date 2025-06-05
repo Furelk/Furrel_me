@@ -23,11 +23,24 @@ useHead({
 </script>
 
 <template>
-  <NuxtPage />
+  <div>
+    <div class="bg-noise"></div>
+    <NuxtPage />
+  </div>
 </template>
 
 <style>
 body {
+  background: linear-gradient(135deg, #fafaff 0%, #f3f0ff 100%);
+  min-height: 100vh;
   font-family: 'JetBrains Mono', monospace;
+}
+.bg-noise {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: url('/noise.png');
+  opacity: 0.07;
 }
 </style>

@@ -3,7 +3,7 @@ vue
 <template>
   <v-app>
     <v-main>
-      <v-container fluid class="pa-0 fill-height d-flex flex-column">
+      <v-container class="d-flex flex-column align-center pa-0" fluid>
         <Header />
         <Hero />
         <About />

@@ -1,14 +1,18 @@
-vue
-// filepath: c:\coding\Furrel\my-portfolio\components\About.vue
 <template>
-  <v-fade-transition>
-    <section id="about" class="flex justify-center py-16">
-      <div class="bg-white/10 backdrop-blur-md rounded-2xl shadow-xl p-8 max-w-2xl w-full text-center border border-white/10">
-        <h2 class="text-3xl font-bold mb-4 text-purple-300">О себе</h2>
-        <p class="text-lg text-gray-200">
-          My name is Furrel, I am a 16-year-old student from Russia.
-        </p>
-      </div>
-    </section>
-  </v-fade-transition>
+  <section class="d-flex justify-center py-16">
+    <div style="
+      background: rgba(255,255,255,0.85);
+      border-radius: 18px;
+      box-shadow: 0 4px 32px 0 rgba(80,70,180,0.07);
+      padding: 40px 32px;
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+      border: 1px solid #ece9f9;
+      backdrop-filter: blur(2px);
+    ">
+      <h2 style="font-size: 2rem; font-weight: 900; margin-bottom: 1rem;">О себе</h2>
+      <p style="font-size: 1.1rem;">My name is Furrel, I am a 16-year-old student from Russia.</p>
+    </div>
+  </section>
 </template>
