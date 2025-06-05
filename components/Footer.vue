@@ -4,20 +4,23 @@
       <v-btn icon href="mailto:4relqwe@gmail.com" target="_blank" class="footer-btn">
         <v-icon size="32">mdi-gmail</v-icon>
       </v-btn>
-      <v-btn icon href="https://discord.com/users/652187584461537281" target="_blank" class="footer-btn">
-        <v-icon size="32">mdi-discord</v-icon>
-      </v-btn>
+      <!-- SVG иконка Telegram -->
       <v-btn icon href="https://t.me/Furelka" target="_blank" class="footer-btn">
-        <v-icon size="32">mdi-telegram</v-icon>
+        <img src="/telegram.svg" alt="Telegram" class="footer-svg-icon" />
+      </v-btn>
+      <!-- SVG иконка Discord -->
+      <v-btn icon href="https://discord.com/users/652187584461537281" target="_blank" class="footer-btn">
+        <img src="/discord.svg" alt="Discord" class="footer-svg-icon" />
+      </v-btn>
+      <!-- SVG иконка Behance -->
+      <v-btn icon href="https://behance.net/yourprofile" target="_blank" class="footer-btn">
+        <img src="/behance.svg" alt="Behance" class="footer-svg-icon" />
       </v-btn>
       <v-btn icon href="https://github.com/Furelk" target="_blank" class="footer-btn">
         <v-icon size="32">mdi-github</v-icon>
       </v-btn>
       <v-btn icon href="https://www.youtube.com/channel/UC2SRQKnK5YFyJ1RE57cOgUg" target="_blank" class="footer-btn">
         <v-icon size="32">mdi-youtube</v-icon>
-      </v-btn>
-      <v-btn icon href="https://behance.net/yourprofile" target="_blank" class="footer-btn">
-        <v-icon size="32">mdi-behance</v-icon>
       </v-btn>
     </v-row>
     <div class="copyright">
@@ -26,10 +29,12 @@
   </footer>
 </template>
 
-<script setup>
-</script>
-
 <style scoped>
+.footer-svg-icon {
+  width: 32px;
+  height: 32px;
+  display: block;
+}
 .footer-icons {
   background: #f5f5f5;
   padding: 32px 0 12px 0;

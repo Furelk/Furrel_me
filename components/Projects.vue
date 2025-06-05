@@ -1,7 +1,7 @@
 vue
 // filepath: c:\coding\Furrel\my-portfolio\components\Projects.vue
 <template>
-  <section class="d-flex justify-center py-16">
+  <section id="projects" class="d-flex justify-center py-16">
     <div style="background: rgba(255,255,255,0.92); border-radius: 24px; box-shadow: 0 2px 24px #a78bfa11; padding: 48px 32px; max-width: 1200px; width: 100%;">
       <h2 style="font-size: 2.2rem; font-weight: 900; margin-bottom: 2.5rem; color: #181818;">Проекты</h2>
       <div style="display: flex; gap: 0; flex-wrap: wrap; justify-content: center;">

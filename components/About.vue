@@ -1,5 +1,5 @@
 <template>
-  <section class="d-flex justify-center py-16">
+  <section id="about" class="d-flex justify-center py-16">
     <div style="
       background: rgba(255,255,255,0.85);
       border-radius: 18px;

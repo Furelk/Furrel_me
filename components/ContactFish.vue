@@ -15,7 +15,15 @@ const canvas = ref(null)
 
 onMounted(() => {
   if (!canvas.value) return
+  const dpr = window.devicePixelRatio || 1
+  const width = 520
+  const height = 320
+  canvas.value.width = width * dpr
+  canvas.value.height = height * dpr
+  canvas.value.style.width = width + 'px'
+  canvas.value.style.height = height + 'px'
   const ctx = canvas.value.getContext('2d')
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
 
   // Круг
   const cx = 260

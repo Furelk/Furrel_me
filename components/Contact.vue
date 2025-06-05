@@ -5,6 +5,5 @@ import ContactFish from '~/components/ContactFish.vue'
 <template>
   <section id="contacts">
     <ContactFish />
-    <!-- ...остальной контент... -->
   </section>
 </template>
