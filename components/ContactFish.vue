@@ -1,13 +1,12 @@
 <template>
-  <div class="fish-canvas-wrapper">
+  <div class="fish-aquarium">
     <canvas ref="canvas" width="520" height="320"></canvas>
-<div class="contact-caption">
-  <span style="font-size:1.2em;vertical-align:-2px;">🐟</span>
-  Свяжитесь со мной — <span class="caption-accent">рыбная ловля запрещена!</span>
-</div>
-</div>
+    <div class="contact-caption">
+      <span style="font-size:1.2em;vertical-align:-2px;">🐟</span>
+      Свяжитесь со мной — <span class="caption-accent">рыбная ловля запрещена!</span>
+    </div>
+  </div>
 </template>
-
 <script setup>
 import { ref, onMounted } from 'vue'
 
@@ -158,6 +157,24 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.fish-aquarium {
+  background: #f8fafb;
+  border-radius: 32px;
+  box-shadow: 0 2px 24px #0002;
+  padding: 32px 24px 16px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: max-content;
+  margin: 32px auto;
+  position: relative;
+  z-index: 1;
+}
+.fish-aquarium canvas {
+  border-radius: 24px;
+  background: #f8fafb;
+  display: block;
+}
 .fish-canvas-wrapper {
   display: flex;
   flex-direction: column;

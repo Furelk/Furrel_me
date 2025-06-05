@@ -5,7 +5,6 @@
     elevation="0"
     app
     height="64"
-    style="backdrop-filter: blur(8px);"
   >
     <v-container>
       <v-row justify="center">
