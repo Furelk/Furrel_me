@@ -5,9 +5,9 @@
     </div>
     <div class="contact-caption">
       <span style="font-size:1.2em;vertical-align:-2px; margin-right: 4px;">🐟</span>
-      Свяжитесь со мной —
+      Contact me —
       <span class="caption-accent-wrapper">
-        <span class="caption-accent"> рыбная ловля запрещена!</span>
+        <span class="caption-accent"> fishing is prohibited!</span>
       </span>
     </div>
   </div>
