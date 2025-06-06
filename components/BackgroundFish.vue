@@ -4,7 +4,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 
-// Исправлено: ширина и высота только после onMounted (SSR-safe)
 const width = ref(0)
 const height = ref(0)
 const canvas = ref(null)
@@ -42,14 +41,41 @@ onMounted(() => {
     speed: 0.6 + Math.random() * 1.2,
     dir: Math.random() > 0.5 ? 1 : -1,
     color: randomColor(),
-    t: Math.random() * Math.PI * 2
+    t: Math.random() * Math.PI * 2,
+    boost: 0,        // новое свойство
+    boostDx: 0,      // новое свойство
+    boostDy: 0       // новое свойство
   }))
 
-  // === ДОБАВЬ: переменная и обработчик мыши ===
+  // === Мышь и обработчик клика ===
   const mouse = { x: width.value / 2, y: height.value / 2 }
   window.addEventListener('mousemove', e => {
     mouse.x = e.clientX
     mouse.y = e.clientY
+  })
+
+  window.addEventListener('click', e => {
+    // Найти ближайшую рыбку в радиусе 80px
+    let minDist = 99999
+    let nearest = null
+    for (const fish of fishes) {
+      const dx = mouse.x - fish.x
+      const dy = mouse.y - fish.y
+      const dist = Math.sqrt(dx * dx + dy * dy)
+      if (dist < 80 && dist < minDist) {
+        minDist = dist
+        nearest = fish
+      }
+    }
+    if (nearest) {
+      // Задать boost в направлении от курсора
+      const dx = nearest.x - mouse.x
+      const dy = nearest.y - mouse.y
+      const len = Math.sqrt(dx * dx + dy * dy) || 1
+      nearest.boost = 18 // сила разгона
+      nearest.boostDx = dx / len
+      nearest.boostDy = dy / len
+    }
   })
 
   function drawWaves() {
@@ -136,36 +162,59 @@ onMounted(() => {
     ctx.restore()
   }
 
-  function updateFishes() {
-    for (const fish of fishes) {
-      // расстояние до курсора
-      const dx = mouse.x - fish.x
-      const dy = mouse.y - fish.y
-      const dist = Math.sqrt(dx * dx + dy * dy)
+function updateFishes() {
+  for (let i = fishes.length - 1; i >= 0; i--) {
+    const fish = fishes[i];
+    // расстояние до курсора
+    const dx = mouse.x - fish.x;
+    const dy = mouse.y - fish.y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
 
-      if (dist < 180) {
-        // Плывёт к курсору
-        fish.x += dx * 0.012 * fish.speed
-        fish.y += dy * 0.012 * fish.speed
-        // Разворачивается к курсору
-        fish.dir = dx > 0 ? 1 : -1
-      } else {
-        // Обычное движение
-        fish.x += fish.speed * fish.dir
+    if (fish.boost > 0) {
+      // разгон рыбёхи
+      fish.x += fish.boostDx * fish.boost;
+      fish.y += fish.boostDy * fish.boost;
+      fish.boost *= 0.99;
+      if (fish.boost < 1) {
+        // Удаляем рыбку после разгона
+        fishes.splice(i, 1);
+        // новая рыба
+        fishes.push({
+          x: Math.random() * width.value,
+          y: 80 + Math.random() * (height.value - 160),
+          size: 32 + Math.random() * 32,
+          speed: 0.6 + Math.random() * 1.2,
+          dir: Math.random() > 0.5 ? 1 : -1,
+          color: randomColor(),
+          t: Math.random() * Math.PI * 2,
+          boost: 0,
+          boostDx: 0,
+          boostDy: 0
+        });
+        continue;
       }
+    } else if (dist < 180) {
+      // плывет к курсору
+      fish.x += dx * 0.012 * fish.speed;
+      fish.y += dy * 0.012 * fish.speed;
+      fish.dir = dx > 0 ? 1 : -1;
+    } else {
+      // плывет просто
+      fish.x += fish.speed * fish.dir;
+    }
 
-      fish.t += 0.012 + Math.random() * 0.01
+    fish.t += 0.012 + Math.random() * 0.01;
 
-      if (fish.dir === 1 && fish.x > width.value + 60) {
-        fish.x = -60
-        fish.y = 80 + Math.random() * (height.value - 160)
-      }
-      if (fish.dir === -1 && fish.x < -60) {
-        fish.x = width.value + 60
-        fish.y = 80 + Math.random() * (height.value - 160)
-      }
+    if (fish.dir === 1 && fish.x > width.value + 60) {
+      fish.x = -60;
+      fish.y = 80 + Math.random() * (height.value - 160);
+    }
+    if (fish.dir === -1 && fish.x < -60) {
+      fish.x = width.value + 60;
+      fish.y = 80 + Math.random() * (height.value - 160);
     }
   }
+}
 
   function animate() {
     ctx.clearRect(0, 0, width.value, height.value)
@@ -180,3 +229,13 @@ onMounted(() => {
   animate()
 })
 </script>
+<style scoped>
+canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  width: 100vw;
+  height: 100vh;
+}
+</style>

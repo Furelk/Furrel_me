@@ -23,10 +23,12 @@ useHead({
 </script>
 
 <template>
-  <div>
-    <div class="bg-noise"></div>
-    <NuxtPage />
-  </div>
+  <v-app>
+    <div>
+      <div class="bg-noise"></div>
+      <NuxtPage />
+    </div>
+  </v-app>
 </template>
 
 <style>
@@ -42,5 +44,13 @@ body {
   z-index: 0;
   background: url('/noise.png');
   opacity: 0.07;
+}
+.main-content {
+  padding-top: 64px;
+}
+@media (max-width: 600px) {
+  .main-content {
+    padding-top: 48px;
+  }
 }
 </style>

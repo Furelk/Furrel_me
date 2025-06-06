@@ -11,8 +11,9 @@
       border: 1px solid #ece9f9;
       backdrop-filter: blur(2px);
     ">
-      <h2 style="font-size: 2rem; font-weight: 900; margin-bottom: 1rem;">О себе</h2>
-      <p style="font-size: 1.1rem;">My name is Furrel, I am a 16-year-old student from Russia.</p>
+      <h2 style="font-size: 2rem; font-weight: 900; margin-bottom: 1rem;">About me</h2>
+      <p style="font-size: 1.1rem;">My name is Furrel, I am a 16 year old student from Russia. I specialize in frontend and backend website development. I also develop small games and mods.</p>
     </div>
   </section>
 </template>
+

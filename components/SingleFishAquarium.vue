@@ -1,20 +1,42 @@
 <template>
   <div class="aquarium-wrapper">
-    <canvas ref="canvas" width="400" height="220" class="aquarium-canvas"></canvas>
+    <canvas ref="canvas" class="aquarium-canvas"></canvas>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 const canvas = ref(null)
+let animationId
+
+function getSize() {
+  // минимум 320x140 максимум 400x220
+  const w = Math.min(Math.max(window.innerWidth * 0.9, 320), 400)
+  const h = w * 0.55
+  return { w, h }
+}
 
 onMounted(() => {
   const ctx = canvas.value.getContext('2d')
   const dpr = window.devicePixelRatio || 1
-  canvas.value.width = 400 * dpr
-  canvas.value.height = 220 * dpr
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+
+  function resize() {
+    const { w, h } = getSize()
+    canvas.value.width = w * dpr
+    canvas.value.height = h * dpr
+    canvas.value.style.width = w + 'px'
+    canvas.value.style.height = h + 'px'
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+    fish.x = w / 2
+    fish.y = h / 2
+    fish.size = Math.max(48, w / 7)
+    // Перегенерировать пузырьки
+    bubbles.forEach(b => {
+      b.x = Math.random() * w
+      b.y = Math.random() * h
+    })
+  }
 
   // Одна рыбка
   const fish = {
@@ -48,11 +70,12 @@ onMounted(() => {
   }
 
   function updateBubbles() {
+    const { h, w } = getSize()
     for (const b of bubbles) {
       b.y -= b.speed
       if (b.y < -10) {
-        b.x = Math.random() * 400
-        b.y = 220 + Math.random() * 20
+        b.x = Math.random() * w
+        b.y = h + Math.random() * 20
         b.r = 3 + Math.random() * 6
         b.speed = 0.5 + Math.random() * 1.2
         b.alpha = 0.2 + Math.random() * 0.3
@@ -62,7 +85,7 @@ onMounted(() => {
 
   function drawFish(fish) {
     ctx.save()
-    ctx.translate(fish.x, fish.y + Math.sin(fish.t) * 8)
+    ctx.translate(fish.x, fish.y + Math.sin(fish.t) * (fish.size / 7))
     ctx.rotate(Math.sin(fish.t) * 0.08)
     // Тело
     ctx.beginPath()
@@ -96,15 +119,23 @@ onMounted(() => {
   }
 
   function animate() {
-    ctx.clearRect(0, 0, 400, 220)
+    const { w, h } = getSize()
+    ctx.clearRect(0, 0, w, h)
     drawBubbles()
     drawFish(fish)
     updateBubbles()
     fish.t += 0.012
-    requestAnimationFrame(animate)
+    animationId = requestAnimationFrame(animate)
   }
 
+  resize()
   animate()
+  window.addEventListener('resize', resize)
+
+  onBeforeUnmount(() => {
+    window.removeEventListener('resize', resize)
+    cancelAnimationFrame(animationId)
+  })
 })
 </script>
 
@@ -117,14 +148,28 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 400px;
-  height: 220px;
+  width: 95vw;
+  max-width: 400px;
+  height: auto;
+  aspect-ratio: 400/220;
   margin: 0 auto;
 }
 .aquarium-canvas {
   display: block;
   border-radius: 32px;
-  width: 400px;
-  height: 220px;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 400/220;
+  max-width: 400px;
+}
+@media (max-width: 600px) {
+  .aquarium-wrapper {
+    max-width: 98vw;
+    border-radius: 20px;
+    box-shadow: 0 1px 12px #0002;
+  }
+  .aquarium-canvas {
+    border-radius: 20px;
+  }
 }
 </style>

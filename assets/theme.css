@@ -1,0 +1,23 @@
+:root {
+  --bg: #f8fafb;
+  --bg-card: #fff;
+  --text: #181818;
+  --text-accent: #7c3aed;
+  --shadow: 0 2px 24px #0002;
+  --bubble: #38bdf8;
+  --border: #ece9f9;
+  --wave1: #e5e8ea;
+  --wave2: #f3f5f7;
+}
+
+[data-theme="dark"] {
+  --bg: #18181b;
+  --bg-card: #23232a;
+  --text: #f3f3f3;
+  --text-accent: #38bdf8;
+  --shadow: 0 2px 24px #0008;
+  --bubble: #2563eb;
+  --border: #23232a;
+  --wave1: #23232a;
+  --wave2: #18181b;
+}
